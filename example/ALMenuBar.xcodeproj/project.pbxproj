@@ -19,6 +19,16 @@
 		58B57F4718ECFD630008ED17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B57F2F18ECFD630008ED17 /* UIKit.framework */; };
 		58B57F4F18ECFD630008ED17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F4D18ECFD630008ED17 /* InfoPlist.strings */; };
 		58B57F5118ECFD630008ED17 /* ALMenuBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F5018ECFD630008ED17 /* ALMenuBarTests.m */; };
+		58B57F5C18ECFD780008ED17 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F5B18ECFD780008ED17 /* RootViewController.m */; };
+		58B57F5F18ECFD8B0008ED17 /* MenuBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F5E18ECFD8B0008ED17 /* MenuBarViewController.m */; };
+		58B57F6518ECFFFE0008ED17 /* ALMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */; };
+		58B57F6618ECFFFE0008ED17 /* ALMenuBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */; };
+		58B57F6E18ED040B0008ED17 /* iPhone_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6818ED040B0008ED17 /* iPhone_sinaweibo.png */; };
+		58B57F6F18ED040B0008ED17 /* iPhone_sinaweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6918ED040B0008ED17 /* iPhone_sinaweibo@2x.png */; };
+		58B57F7018ED040B0008ED17 /* iPhone_tencentweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6A18ED040B0008ED17 /* iPhone_tencentweibo.png */; };
+		58B57F7118ED040B0008ED17 /* iPhone_tencentweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6B18ED040B0008ED17 /* iPhone_tencentweibo@2x.png */; };
+		58B57F7218ED040B0008ED17 /* iPhone_weixinShare.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6C18ED040B0008ED17 /* iPhone_weixinShare.png */; };
+		58B57F7318ED040B0008ED17 /* iPhone_weixinShare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6D18ED040B0008ED17 /* iPhone_weixinShare@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +58,20 @@
 		58B57F4C18ECFD630008ED17 /* ALMenuBarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ALMenuBarTests-Info.plist"; sourceTree = "<group>"; };
 		58B57F4E18ECFD630008ED17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		58B57F5018ECFD630008ED17 /* ALMenuBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALMenuBarTests.m; sourceTree = "<group>"; };
+		58B57F5A18ECFD780008ED17 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		58B57F5B18ECFD780008ED17 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		58B57F5D18ECFD8B0008ED17 /* MenuBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBarViewController.h; sourceTree = "<group>"; };
+		58B57F5E18ECFD8B0008ED17 /* MenuBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBarViewController.m; sourceTree = "<group>"; };
+		58B57F6118ECFFFE0008ED17 /* ALMenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALMenuBar.h; sourceTree = "<group>"; };
+		58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALMenuBar.m; sourceTree = "<group>"; };
+		58B57F6318ECFFFE0008ED17 /* ALMenuBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALMenuBarItem.h; sourceTree = "<group>"; };
+		58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALMenuBarItem.m; sourceTree = "<group>"; };
+		58B57F6818ED040B0008ED17 /* iPhone_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_sinaweibo.png; sourceTree = "<group>"; };
+		58B57F6918ED040B0008ED17 /* iPhone_sinaweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_sinaweibo@2x.png"; sourceTree = "<group>"; };
+		58B57F6A18ED040B0008ED17 /* iPhone_tencentweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_tencentweibo.png; sourceTree = "<group>"; };
+		58B57F6B18ED040B0008ED17 /* iPhone_tencentweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_tencentweibo@2x.png"; sourceTree = "<group>"; };
+		58B57F6C18ED040B0008ED17 /* iPhone_weixinShare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_weixinShare.png; sourceTree = "<group>"; };
+		58B57F6D18ED040B0008ED17 /* iPhone_weixinShare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_weixinShare@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +133,12 @@
 			children = (
 				58B57F3A18ECFD630008ED17 /* AppDelegate.h */,
 				58B57F3B18ECFD630008ED17 /* AppDelegate.m */,
+				58B57F5A18ECFD780008ED17 /* RootViewController.h */,
+				58B57F5B18ECFD780008ED17 /* RootViewController.m */,
+				58B57F5D18ECFD8B0008ED17 /* MenuBarViewController.h */,
+				58B57F5E18ECFD8B0008ED17 /* MenuBarViewController.m */,
+				58B57F6718ED040B0008ED17 /* images */,
+				58B57F6018ECFFFE0008ED17 /* ALMenuBar */,
 				58B57F3D18ECFD630008ED17 /* Images.xcassets */,
 				58B57F3218ECFD630008ED17 /* Supporting Files */,
 			);
@@ -142,6 +172,31 @@
 				58B57F4D18ECFD630008ED17 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		58B57F6018ECFFFE0008ED17 /* ALMenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				58B57F6118ECFFFE0008ED17 /* ALMenuBar.h */,
+				58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */,
+				58B57F6318ECFFFE0008ED17 /* ALMenuBarItem.h */,
+				58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */,
+			);
+			name = ALMenuBar;
+			path = ../../ALMenuBar;
+			sourceTree = "<group>";
+		};
+		58B57F6718ED040B0008ED17 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				58B57F6818ED040B0008ED17 /* iPhone_sinaweibo.png */,
+				58B57F6918ED040B0008ED17 /* iPhone_sinaweibo@2x.png */,
+				58B57F6A18ED040B0008ED17 /* iPhone_tencentweibo.png */,
+				58B57F6B18ED040B0008ED17 /* iPhone_tencentweibo@2x.png */,
+				58B57F6C18ED040B0008ED17 /* iPhone_weixinShare.png */,
+				58B57F6D18ED040B0008ED17 /* iPhone_weixinShare@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +276,12 @@
 			files = (
 				58B57F3618ECFD630008ED17 /* InfoPlist.strings in Resources */,
 				58B57F3E18ECFD630008ED17 /* Images.xcassets in Resources */,
+				58B57F6E18ED040B0008ED17 /* iPhone_sinaweibo.png in Resources */,
+				58B57F6F18ED040B0008ED17 /* iPhone_sinaweibo@2x.png in Resources */,
+				58B57F7118ED040B0008ED17 /* iPhone_tencentweibo@2x.png in Resources */,
+				58B57F7218ED040B0008ED17 /* iPhone_weixinShare.png in Resources */,
+				58B57F7018ED040B0008ED17 /* iPhone_tencentweibo.png in Resources */,
+				58B57F7318ED040B0008ED17 /* iPhone_weixinShare@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +301,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				58B57F3C18ECFD630008ED17 /* AppDelegate.m in Sources */,
+				58B57F6518ECFFFE0008ED17 /* ALMenuBar.m in Sources */,
+				58B57F6618ECFFFE0008ED17 /* ALMenuBarItem.m in Sources */,
 				58B57F3818ECFD630008ED17 /* main.m in Sources */,
+				58B57F5C18ECFD780008ED17 /* RootViewController.m in Sources */,
+				58B57F5F18ECFD8B0008ED17 /* MenuBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,9 +424,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ALMenuBar/ALMenuBar-Prefix.pch";
 				INFOPLIST_FILE = "ALMenuBar/ALMenuBar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -372,9 +439,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ALMenuBar/ALMenuBar-Prefix.pch";
 				INFOPLIST_FILE = "ALMenuBar/ALMenuBar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -441,6 +510,7 @@
 				58B57F5618ECFD630008ED17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		58B57F5718ECFD630008ED17 /* Build configuration list for PBXNativeTarget "ALMenuBarTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +519,7 @@
 				58B57F5918ECFD630008ED17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
