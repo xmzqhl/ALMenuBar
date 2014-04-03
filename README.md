@@ -2,5 +2,5 @@ ALMenuBar
 =========
 support ARC or MRC
 
-When your project has the action which share something to other social app,you can user this to show the choose,hope you
+When your project has the action which sharing something to other social app,you can user this to show the choice,hope you
 enjoy it.
