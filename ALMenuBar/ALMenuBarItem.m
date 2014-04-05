@@ -22,6 +22,7 @@ static CGFloat kBottomMargin = 10.0f;
 
 - (void)dealloc
 {
+     NSLog(@"%s", __FUNCTION__);
 #if !__has_feature(objc_arc)
     [_imageView release]; _imageView = nil;
     [_titleLabel release]; _titleLabel = nil;
@@ -43,7 +44,9 @@ static CGFloat kBottomMargin = 10.0f;
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-    
+        _target = target;
+        _action = action;
+        
         _imageView = [[UIImageView alloc] init];
         _imageView.image = image;
         _imageView.backgroundColor = [UIColor clearColor];
@@ -56,22 +59,12 @@ static CGFloat kBottomMargin = 10.0f;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.text = title;
         [self addSubview:_titleLabel];
-        
-        UIControl *control = [[UIControl alloc] init];
-        [control addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-        control.frame = self.bounds;
-        control.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self addSubview:control];
-#if !__has_feature(objc_arc)
-        [control release];
-#endif
     }
     return self;
 }
 
 - (void)layoutSubviews
 {
-    //_imageView.center = self.center;
     CGSize size = _imageView.image.size;
     _imageView.frame = CGRectMake((self.frame.size.width - size.width) / 2.0, (self.frame.size.height - size.height - kTitleLabelHeight) / 2.0, size.width, size.height);
     _titleLabel.frame = CGRectMake(0, self.frame.size.height - kTitleLabelHeight - kBottomMargin, self.frame.size.width, kTitleLabelHeight);

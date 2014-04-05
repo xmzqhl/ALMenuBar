@@ -14,10 +14,9 @@ static CGFloat kDefaultHalfHeight = 130;
 static CGFloat kTitleLabelHeight = 40.0f;
 static NSInteger kDefaultItemsInOnePage = 6;
 static CGFloat kDefaultPageControlHeight = 20.0;
-
 static CGFloat kDefaultItemSize = 90.0f;
-#define kAnimationDuration 0.3f
 static CGFloat kDefaultTitleFontSize = 16.0f;
+#define kAnimationDuration 0.3f
 
 @interface ALMenuBar ()<UIScrollViewDelegate>
 @property (nonatomic, retain) NSMutableArray *menuBarItems;
@@ -31,6 +30,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)dealloc
 {
+     NSLog(@"%s", __FUNCTION__);
     for (ALMenuBarItem* item in _menuBarItems) {
         [item removeFromSuperview];
     }
@@ -135,9 +135,20 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
 }
 
+- (void)addTapGestureToMenuBar:(ALMenuBarItem *)item
+{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ALMenuBarDidTaped:)];
+    [item addGestureRecognizer:tap];
+#if !__has_feature(objc_arc)
+    [tap release];
+#endif
+}
+
 - (void)setSingalItemFrame
 {
     ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:0];
+    menuBarItem.index = 0;
+    [self addTapGestureToMenuBar:menuBarItem];
     menuBarItem.frame = CGRectMake((_scrollView.frame.size.width - kDefaultItemSize) / 2.0, 0, kDefaultItemSize, kDefaultItemSize);
     [_scrollView addSubview:menuBarItem];
 }
@@ -148,6 +159,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     CGFloat margin = totalMargin / 3.0;
     for (int num = 0; num < _menuBarItems.count; num++) {
         ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:num];
+        menuBarItem.index = num;
+        [self addTapGestureToMenuBar:menuBarItem];
         menuBarItem.frame = CGRectMake(margin + num * (kDefaultItemSize + margin) , 0, kDefaultItemSize, kDefaultItemSize);
         [_scrollView addSubview:menuBarItem];
     }
@@ -161,6 +174,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
                 break;
             }
             ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:index];
+            menuBarItem.index= index;
+            [self addTapGestureToMenuBar:menuBarItem];
             int relativeIndex = index - (page * 6);
             int row = (relativeIndex / 3 < 1) ? 0 : 1; /**< 行数*/
             int coloumn = (relativeIndex % 3); /**< 列数*/
@@ -222,15 +237,29 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
 }
 
+- (void)ALMenuBarDidTaped:(UITapGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        ALMenuBarItem *item = (ALMenuBarItem *)gesture.view;
+        if (item.target && item.action && [item.target respondsToSelector:item.action]) {
+            [item.target performSelector:item.action withObject:item afterDelay:0];
+        }
+        
+        if ([_delegate respondsToSelector:@selector(ALMenuBar:didSelectIndex:)]) {
+            [_delegate ALMenuBar:self didSelectIndex:item.index];
+        }
+    }
+}
+
 - (void)ALMunuBarShow
 {
     UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
     if (![keywindow.subviews containsObject:self]) {
         // Calulate all frames
-        CGRect selfFrame = self.frame;
+        
         CGRect windowFrame = keywindow.frame;
-        CGRect f = CGRectMake(0, windowFrame.size.height - selfFrame.size.height, windowFrame.size.width, selfFrame.size.height);
-        CGRect leftFrame = CGRectMake(0, 0, windowFrame.size.width, windowFrame.size.height - selfFrame.size.height);
+        CGRect f = CGRectMake(0, windowFrame.size.height - self.frame.size.height, windowFrame.size.width, self.frame.size.height);
+        CGRect leftFrame = CGRectMake(0, 0, windowFrame.size.width, windowFrame.size.height - self.frame.size.height);
         
         if (!_coverView) {
             _coverView = [[UIView alloc] initWithFrame:keywindow.bounds];
@@ -247,7 +276,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 #endif
         
         // Present view animated
-        self.frame = CGRectMake(0, windowFrame.size.height, windowFrame.size.width, selfFrame.size.height);
+        self.frame = CGRectMake(0, windowFrame.size.height, windowFrame.size.width, self.frame.size.height);
         [keywindow addSubview:self];
         
         __block typeof(self) blockSelf = self;

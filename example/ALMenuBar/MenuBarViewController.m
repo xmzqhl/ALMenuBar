@@ -10,7 +10,7 @@
 #import "ALMenuBar.h"
 #import "ALMenuBarItem.h"
 
-@interface MenuBarViewController ()
+@interface MenuBarViewController ()<ALMenuBarDelegate>
 @property (nonatomic, retain) ALMenuBar *alMenuBar;
 @end
 
@@ -18,7 +18,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"%s", __FUNCTION__);
+    _alMenuBar.delegate = nil;
 #if !__has_feature(objc_arc)
     [_alMenuBar release]; _alMenuBar = nil;
     [super dealloc];
@@ -39,7 +39,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(150, 200, 70, 40);
+    button.frame = CGRectMake((CGRectGetWidth(self.view.bounds) - 70 ) / 2.0, 200, 70, 40);
     [button setTitle:@"show" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showMenuBar) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
@@ -82,6 +82,7 @@
     
     if (!_alMenuBar) {
         _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
+        _alMenuBar.delegate = self;
     }
     [_alMenuBar ALMunuBarShow];
 #if !__has_feature(objc_arc)
@@ -111,5 +112,15 @@
 {
     [_alMenuBar ALMunuBarDismiss];
 }
+
+//- (void)ALMenuBar:(ALMenuBar *)menuBar didSelectIndex:(NSInteger)index
+//{
+//    [_alMenuBar ALMunuBarDismiss];
+//}
+
+//- (void)ALMenuBarDidDismiss:(ALMenuBar *)menuBar
+//{
+//
+//}
 
 @end
