@@ -22,7 +22,6 @@ static CGFloat kBottomMargin = 10.0f;
 
 - (void)dealloc
 {
-     NSLog(@"%s", __FUNCTION__);
 #if !__has_feature(objc_arc)
     [_imageView release]; _imageView = nil;
     [_titleLabel release]; _titleLabel = nil;

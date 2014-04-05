@@ -12,11 +12,11 @@
 static CGFloat kDefaultHeight = 240.0f;
 static CGFloat kDefaultHalfHeight = 130;
 static CGFloat kTitleLabelHeight = 40.0f;
-static NSInteger kDefaultItemsInOnePage = 6;
+static NSInteger kDefaultItemsNumberInOnePage = 6;
 static CGFloat kDefaultPageControlHeight = 20.0;
 static CGFloat kDefaultItemSize = 90.0f;
 static CGFloat kDefaultTitleFontSize = 16.0f;
-#define kAnimationDuration 0.3f
+#define kDefaultAnimationDuration 0.3f
 
 @interface ALMenuBar ()<UIScrollViewDelegate>
 @property (nonatomic, retain) NSMutableArray *menuBarItems;
@@ -30,7 +30,6 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)dealloc
 {
-     NSLog(@"%s", __FUNCTION__);
     for (ALMenuBarItem* item in _menuBarItems) {
         [item removeFromSuperview];
     }
@@ -109,7 +108,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 {
     NSInteger page = pageControl.currentPage;
     __block typeof(_scrollView) blockScrollView = _scrollView;
-    [UIView animateWithDuration:kAnimationDuration animations:^{
+    [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         blockScrollView.contentOffset = CGPointMake(page * _scrollView.frame.size.width, 0);
     }];
 }
@@ -226,7 +225,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (NSInteger)totalPages
 {
-    return ((_menuBarItems.count / kDefaultItemsInOnePage) + 1);
+    return ((_menuBarItems.count / kDefaultItemsNumberInOnePage) + 1);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -239,7 +238,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)ALMenuBarDidTaped:(UITapGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateEnded) {
+    if (gesture.state == UIGestureRecognizerStateEnded && [gesture.view isKindOfClass:[ALMenuBarItem class]]) {
         ALMenuBarItem *item = (ALMenuBarItem *)gesture.view;
         if (item.target && item.action && [item.target respondsToSelector:item.action]) {
             [item.target performSelector:item.action withObject:item afterDelay:0];
@@ -256,10 +255,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
     if (![keywindow.subviews containsObject:self]) {
         // Calulate all frames
-        
-        CGRect windowFrame = keywindow.frame;
-        CGRect f = CGRectMake(0, windowFrame.size.height - self.frame.size.height, windowFrame.size.width, self.frame.size.height);
-        CGRect leftFrame = CGRectMake(0, 0, windowFrame.size.width, windowFrame.size.height - self.frame.size.height);
+        CGRect showFrame = CGRectMake(0, keywindow.frame.size.height - self.frame.size.height, keywindow.frame.size.width, self.frame.size.height);
+        CGRect leftFrame = CGRectMake(0, 0, keywindow.frame.size.width, keywindow.frame.size.height - self.frame.size.height);
         
         if (!_coverView) {
             _coverView = [[UIView alloc] initWithFrame:keywindow.bounds];
@@ -274,15 +271,13 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 #if !__has_feature(objc_arc)
         [dismissButton release];
 #endif
-        
         // Present view animated
-        self.frame = CGRectMake(0, windowFrame.size.height, windowFrame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(0, keywindow.frame.size.height, keywindow.frame.size.width, self.frame.size.height);
         [keywindow addSubview:self];
         
         __block typeof(self) blockSelf = self;
-        __block typeof(f) blockF = f;
-        [UIView animateWithDuration:kAnimationDuration animations:^{
-            blockSelf.frame = blockF;
+        [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
+            blockSelf.frame = showFrame;
         }];
     }
 }
@@ -290,18 +285,22 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 - (void)ALMunuBarDismiss
 {
     UIWindow * keywindow = [[UIApplication sharedApplication] keyWindow];
-    __block typeof(keywindow) blockKeyWindow = keywindow;
-    __block typeof(self) blockSelf = self;
-    __block typeof(_coverView) blockCoverView = _coverView;
-    [UIView animateWithDuration:kAnimationDuration animations:^{
-        blockSelf.frame = CGRectMake(0, blockKeyWindow.frame.size.height, blockSelf.frame.size.width, blockSelf.frame.size.height);
-    } completion:^(BOOL finished) {
-        [blockCoverView removeFromSuperview];
-        [blockSelf removeFromSuperview];
-    }];
-    
-    if ([_delegate respondsToSelector:@selector(ALMenuBarDidDismiss:)]) {
-        [_delegate ALMenuBarDidDismiss:self];
+    CGRect dismissFrame = CGRectMake(0, keywindow.frame.size.height, self.frame.size.width, self.frame.size.height);
+    if (!CGRectEqualToRect(self.frame, dismissFrame)) {
+        __block typeof(self) blockSelf = self;
+        __block typeof(_coverView) blockCoverView = _coverView;
+        if ([_delegate respondsToSelector:@selector(ALMenuBarWillDismiss:)]) {
+            [_delegate ALMenuBarWillDismiss:self];
+        }
+        [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
+            blockSelf.frame = dismissFrame;
+        } completion:^(BOOL finished) {
+            [blockCoverView removeFromSuperview];
+            [blockSelf removeFromSuperview];
+            if ([_delegate respondsToSelector:@selector(ALMenuBarDidDismiss:)]) {
+                [_delegate ALMenuBarDidDismiss:blockSelf];
+            }
+        }];
     }
 }
 

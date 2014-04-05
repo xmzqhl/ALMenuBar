@@ -54,21 +54,21 @@
 - (void)showMenuBar
 {
     UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
-    ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare)];
+    ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
-    ALMenuBarItem *item2 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare)];
+    ALMenuBarItem *item2 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
-    ALMenuBarItem *item3 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare)];
-    ALMenuBarItem *item4 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare)];
+    ALMenuBarItem *item3 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
+    ALMenuBarItem *item4 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
-    ALMenuBarItem *item5 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare)];
+    ALMenuBarItem *item5 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
-    ALMenuBarItem *item6 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare)];
-    ALMenuBarItem *item7 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare)];
+    ALMenuBarItem *item6 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
+    ALMenuBarItem *item7 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
-    ALMenuBarItem *item8 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare)];
+    ALMenuBarItem *item8 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
-    ALMenuBarItem *item9 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare)];
+    ALMenuBarItem *item9 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
     NSMutableArray *items = [NSMutableArray array];
     [items addObject:item1];
     [items addObject:item2];
@@ -98,17 +98,17 @@
 #endif
 }
 
-- (void)weiboShare
+- (void)weiboShare:(ALMenuBarItem *)item
 {
     [_alMenuBar ALMunuBarDismiss];
 }
 
-- (void)tencentWeoboShare
+- (void)tencentWeoboShare:(ALMenuBarItem *)item
 {
     [_alMenuBar ALMunuBarDismiss];
 }
 
-- (void)weixinShare
+- (void)weixinShare:(ALMenuBarItem *)item
 {
     [_alMenuBar ALMunuBarDismiss];
 }
@@ -117,10 +117,15 @@
 //{
 //    [_alMenuBar ALMunuBarDismiss];
 //}
-
+//
 //- (void)ALMenuBarDidDismiss:(ALMenuBar *)menuBar
 //{
+//    NSLog(@"%s", __FUNCTION__);
+//}
 //
+//- (void)ALMenuBarWillDismiss:(ALMenuBar *)menuBar
+//{
+//    NSLog(@"%s", __FUNCTION__);
 //}
 
 @end

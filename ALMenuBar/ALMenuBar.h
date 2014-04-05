@@ -12,6 +12,7 @@
 
 @protocol ALMenuBarDelegate <NSObject>
 @optional
+- (void)ALMenuBarWillDismiss:(ALMenuBar *)menuBar;
 - (void)ALMenuBarDidDismiss:(ALMenuBar *)menuBar;
 - (void)ALMenuBar:(ALMenuBar *)menuBar didSelectIndex:(NSInteger)index;
 @end
