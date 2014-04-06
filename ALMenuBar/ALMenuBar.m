@@ -56,6 +56,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
         self.layer.shadowColor = [[UIColor blackColor] CGColor];
         self.layer.shadowOffset = CGSizeMake(0, -2);
         self.layer.shadowRadius = 5.0;
@@ -83,8 +84,6 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)initCommonUI
 {
-    self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
-    
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, self.frame.size.height - kDefaultPageControlHeight - kTitleLabelHeight)];
     
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
