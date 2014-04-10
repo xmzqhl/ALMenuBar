@@ -8,7 +8,6 @@
 
 #import "MenuBarViewController.h"
 #import "ALMenuBar.h"
-#import "ALMenuBarItem.h"
 
 @interface MenuBarViewController ()<ALMenuBarDelegate>
 @property (nonatomic, retain) ALMenuBar *alMenuBar;

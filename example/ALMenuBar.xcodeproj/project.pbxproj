@@ -22,7 +22,6 @@
 		58B57F5C18ECFD780008ED17 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F5B18ECFD780008ED17 /* RootViewController.m */; };
 		58B57F5F18ECFD8B0008ED17 /* MenuBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F5E18ECFD8B0008ED17 /* MenuBarViewController.m */; };
 		58B57F6518ECFFFE0008ED17 /* ALMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */; };
-		58B57F6618ECFFFE0008ED17 /* ALMenuBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */; };
 		58B57F6E18ED040B0008ED17 /* iPhone_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6818ED040B0008ED17 /* iPhone_sinaweibo.png */; };
 		58B57F6F18ED040B0008ED17 /* iPhone_sinaweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6918ED040B0008ED17 /* iPhone_sinaweibo@2x.png */; };
 		58B57F7018ED040B0008ED17 /* iPhone_tencentweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B57F6A18ED040B0008ED17 /* iPhone_tencentweibo.png */; };
@@ -64,8 +63,6 @@
 		58B57F5E18ECFD8B0008ED17 /* MenuBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBarViewController.m; sourceTree = "<group>"; };
 		58B57F6118ECFFFE0008ED17 /* ALMenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALMenuBar.h; sourceTree = "<group>"; };
 		58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALMenuBar.m; sourceTree = "<group>"; };
-		58B57F6318ECFFFE0008ED17 /* ALMenuBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALMenuBarItem.h; sourceTree = "<group>"; };
-		58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALMenuBarItem.m; sourceTree = "<group>"; };
 		58B57F6818ED040B0008ED17 /* iPhone_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_sinaweibo.png; sourceTree = "<group>"; };
 		58B57F6918ED040B0008ED17 /* iPhone_sinaweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone_sinaweibo@2x.png"; sourceTree = "<group>"; };
 		58B57F6A18ED040B0008ED17 /* iPhone_tencentweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_tencentweibo.png; sourceTree = "<group>"; };
@@ -179,8 +176,6 @@
 			children = (
 				58B57F6118ECFFFE0008ED17 /* ALMenuBar.h */,
 				58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */,
-				58B57F6318ECFFFE0008ED17 /* ALMenuBarItem.h */,
-				58B57F6418ECFFFE0008ED17 /* ALMenuBarItem.m */,
 			);
 			name = ALMenuBar;
 			path = ../../ALMenuBar;
@@ -302,7 +297,6 @@
 			files = (
 				58B57F3C18ECFD630008ED17 /* AppDelegate.m in Sources */,
 				58B57F6518ECFFFE0008ED17 /* ALMenuBar.m in Sources */,
-				58B57F6618ECFFFE0008ED17 /* ALMenuBarItem.m in Sources */,
 				58B57F3818ECFD630008ED17 /* main.m in Sources */,
 				58B57F5C18ECFD780008ED17 /* RootViewController.m in Sources */,
 				58B57F5F18ECFD8B0008ED17 /* MenuBarViewController.m in Sources */,
