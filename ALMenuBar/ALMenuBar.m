@@ -17,7 +17,7 @@ static CGFloat kDefaultItemSize = 90.0f;
 static CGFloat kDefaultTitleFontSize = 16.0f;
 #define kDefaultAnimationDuration 0.3f
 
-@interface ALMenuBar ()<UIScrollViewDelegate>
+@interface ALMenuBar () <UIScrollViewDelegate>
 @property (nonatomic, retain) NSMutableArray *menuBarItems;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UILabel *titleLabel;
@@ -47,6 +47,24 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setSelfProperty];
+        _menuBarItems = [[NSMutableArray alloc] init];
+        [self initTitleLabelWithTitle:@""];
+        [self initCommonUI];
+        [self resetSubviewLayout];
+    }
+    return self;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setSelfProperty];
+        _menuBarItems = [[NSMutableArray alloc] init];
+        [self initTitleLabelWithTitle:@""];
+        [self initCommonUI];
+        [self resetSubviewLayout];
     }
     return self;
 }
@@ -55,43 +73,85 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
-        self.layer.shadowColor = [[UIColor blackColor] CGColor];
-        self.layer.shadowOffset = CGSizeMake(0, -2);
-        self.layer.shadowRadius = 5.0;
-        self.layer.shadowOpacity = 0.8;
-        CGRect frame = [UIScreen mainScreen].bounds;
-        self.frame = CGRectMake(0, 0, frame.size.width, kDefaultHeight);
-        
+        [self setSelfProperty];
         _menuBarItems = [[NSMutableArray alloc] initWithArray:items];
-        
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTitleLabelHeight)];
-        _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.text = title;
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:kDefaultTitleFontSize];
-        _titleLabel.layer.borderColor = [UIColor grayColor].CGColor;
-        _titleLabel.layer.borderWidth = 1.0f;
-        [self addSubview:_titleLabel];
-        
+        [self initTitleLabelWithTitle:title];
         [self initCommonUI];
         [self resetSubviewLayout];
     }
     return self;
 }
 
+- (void)setSelfProperty
+{
+    self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.layer.shadowOffset = CGSizeMake(0, -2);
+    self.layer.shadowRadius = 5.0;
+    self.layer.shadowOpacity = 0.8;
+    CGRect frame = [UIScreen mainScreen].bounds;
+    self.frame = CGRectMake(0, 0, frame.size.width, kDefaultHeight);
+}
+
+- (void)initTitleLabelWithTitle:(NSString *)title
+{
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTitleLabelHeight)];
+    _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.text = title;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.font = [UIFont systemFontOfSize:kDefaultTitleFontSize];
+    _titleLabel.layer.borderColor = [UIColor grayColor].CGColor;
+    _titleLabel.layer.borderWidth = 1.0f;
+    [self addSubview:_titleLabel];
+}
+
+- (void)setTitle:(NSString *)title
+{
+    if (!_titleLabel) {
+        [self initTitleLabelWithTitle:title];
+    } else {
+        _titleLabel.text = title ? title : @"";
+    }
+}
+
+- (void)setItems:(NSMutableArray *)items
+{
+    if (![_menuBarItems isEqualToArray:items]) {
+#if !__has_feature(objc_arc)
+        [_menuBarItems release];
+#endif
+        _menuBarItems = items;
+#if !__has_feature(objc_arc)
+        [_menuBarItems retain];
+#endif
+        [self setScrollViewEnable];
+        [self initPageControl];
+        [self resetSubviewLayout];
+    }
+}
+
 - (void)initCommonUI
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, self.frame.size.height - kDefaultPageControlHeight - kTitleLabelHeight)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
     
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _scrollView.scrollEnabled = ([self totalPages] > 1);
+    [self setScrollViewEnable];
     _scrollView.pagingEnabled = YES;
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:_scrollView];
     
+    [self initPageControl];
+}
+
+- (void)setScrollViewEnable
+{
+    _scrollView.scrollEnabled = ([self totalPages] > 1);
+}
+
+- (void)initPageControl
+{
     if ([self totalPages] > 1) {
         _pageControl = [[UIPageControl alloc] init];
         _pageControl.frame = CGRectMake(0, self.frame.size.height - kDefaultPageControlHeight, self.frame.size.width, kDefaultPageControlHeight);
@@ -113,7 +173,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)resetSubviewLayout
 {
-    if(_menuBarItems.count == 0) {
+    if (_menuBarItems.count == 0) {
         return;
     }
     if (_pageControl) {
@@ -190,30 +250,29 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         
         self.frame = CGRectMake(self.frame.origin.x,
                                 self.frame.origin.y,
-                                self.frame.size.width,
+                                CGRectGetWidth(self.bounds),
                                 kDefaultHalfHeight);
     } else {
         self.frame = CGRectMake(self.frame.origin.x,
                                 self.frame.origin.y,
-                                self.frame.size.width,
+                                CGRectGetWidth(self.bounds),
                                 kDefaultHeight);
     }
     
     if ([self totalPages] > 1) {
         _scrollView.frame = CGRectMake(0,
                                        kTitleLabelHeight,
-                                       self.bounds.size.width,
-                                       self.bounds.size.height - kDefaultPageControlHeight - kTitleLabelHeight);
+                                       CGRectGetWidth(self.bounds),
+                                       CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight);
     } else {
         _scrollView.frame = CGRectMake(0,
                                           kTitleLabelHeight,
-                                          self.bounds.size.width,
-                                          self.bounds.size.height - kTitleLabelHeight);
+                                          CGRectGetWidth(self.bounds),
+                                          CGRectGetHeight(self.bounds) - kTitleLabelHeight);
     }
     
-    _scrollView.contentSize = CGSizeMake([self totalPages] * _scrollView.bounds.size.width,
-                                            _scrollView.bounds.size.height);
-
+    _scrollView.contentSize = CGSizeMake([self totalPages] * CGRectGetWidth(_scrollView.bounds),
+                                            CGRectGetHeight(_scrollView.bounds));
 }
 
 - (void)layoutSubviews
@@ -361,8 +420,8 @@ static CGFloat kBottomMargin = 10.0f;
 - (void)layoutSubviews
 {
     CGSize size = _imageView.image.size;
-    _imageView.frame = CGRectMake((self.frame.size.width - size.width) / 2.0, (self.frame.size.height - size.height - kItemTitleLabelHeight) / 2.0, size.width, size.height);
-    _titleLabel.frame = CGRectMake(0, self.frame.size.height - kItemTitleLabelHeight - kBottomMargin, self.frame.size.width, kItemTitleLabelHeight);
+    _imageView.frame = CGRectMake((CGRectGetWidth(self.bounds) - size.width) / 2.0, (self.frame.size.height - size.height - kItemTitleLabelHeight) / 2.0, size.width, size.height);
+    _titleLabel.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - kItemTitleLabelHeight - kBottomMargin, self.frame.size.width, kItemTitleLabelHeight);
 }
 
 @end

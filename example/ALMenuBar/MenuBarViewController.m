@@ -9,7 +9,7 @@
 #import "MenuBarViewController.h"
 #import "ALMenuBar.h"
 
-@interface MenuBarViewController ()<ALMenuBarDelegate>
+@interface MenuBarViewController () <ALMenuBarDelegate>
 @property (nonatomic, retain) ALMenuBar *alMenuBar;
 @end
 
@@ -54,18 +54,25 @@
 {
     UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
     ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
     ALMenuBarItem *item2 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item3 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
+    
     ALMenuBarItem *item4 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
     ALMenuBarItem *item5 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item6 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
     ALMenuBarItem *item7 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
     ALMenuBarItem *item8 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
+    
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item9 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
     NSMutableArray *items = [NSMutableArray array];
@@ -81,6 +88,9 @@
     
     if (!_alMenuBar) {
         _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
+//        _alMenuBar = [[ALMenuBar alloc] initWithFrame:CGRectZero];
+//        [_alMenuBar setTitle:@"分享到"];
+//        [_alMenuBar setItems:items];
         _alMenuBar.delegate = self;
     }
     [_alMenuBar ALMunuBarShow];

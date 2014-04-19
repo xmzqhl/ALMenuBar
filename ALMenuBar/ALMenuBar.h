@@ -27,6 +27,8 @@
  @param items 一个可变数组，里面存放的是ALMenuBarItem对象。
  */
 - (instancetype)initWithTitle:(NSString *)title items:(NSMutableArray *)items;
+- (void)setTitle:(NSString *)title;
+- (void)setItems:(NSMutableArray *)items;
 - (void)ALMunuBarDismiss;
 - (void)ALMunuBarShow;
 @end
@@ -34,8 +36,8 @@
 @interface ALMenuBarItem : UIView
 
 @property (nonatomic, assign) NSInteger index;
-@property (nonatomic, assign) id target;
-@property (nonatomic) SEL action;
+@property (nonatomic, assign) id        target;
+@property (nonatomic)         SEL       action;
 
 /**
  @brief 初始化视图，这是唯一的初始化方式。
