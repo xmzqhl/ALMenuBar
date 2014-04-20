@@ -22,15 +22,35 @@
 @property (nonatomic, assign) id<ALMenuBarDelegate>delegate;
 
 /**
- @brief 唯一的初始化视图方式
+ @brief 初始化视图
  @param title 视图标题
  @param items 一个可变数组，里面存放的是ALMenuBarItem对象。
  */
 - (instancetype)initWithTitle:(NSString *)title items:(NSMutableArray *)items;
+
+/**
+ 设置视图标题
+ @attention 如果未使用initWithTitle:items:方法初始化视图，或者你想更改标题的时候使用
+ */
 - (void)setTitle:(NSString *)title;
+
+/**
+ 设置item
+ @param items 一个可变的数组，里面存放ALMenuBarItem对象
+ @attention 如果未使用initWithTitle:items:方法初始化视图，或者需要修改items的时候使用
+ */
 - (void)setItems:(NSMutableArray *)items;
-- (void)ALMunuBarDismiss;
+
+/**
+ 显示视图
+ */
 - (void)ALMunuBarShow;
+
+/**
+ 移除视图
+ */
+- (void)ALMunuBarDismiss;
+
 @end
 
 @interface ALMenuBarItem : UIView
