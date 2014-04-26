@@ -31,7 +31,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(150, 200, 70, 40);
     [button setTitle:@"push" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonDidTap) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(buttonDidTaped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }
 
@@ -41,7 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)buttonDidTap
+- (void)buttonDidTaped
 {
     MenuBarViewController *_menuBarVC = [[MenuBarViewController alloc] init];
     [self.navigationController pushViewController:_menuBarVC animated:YES];
