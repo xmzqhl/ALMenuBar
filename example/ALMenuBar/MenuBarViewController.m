@@ -93,7 +93,7 @@
 //        [_alMenuBar setItems:items];
         _alMenuBar.delegate = self;
     }
-    [_alMenuBar ALMunuBarShow];
+    [_alMenuBar ALMenuBarShow];
 #if !__has_feature(objc_arc)
     [item1 release];
     [item2 release];
@@ -109,22 +109,22 @@
 
 - (void)weiboShare:(ALMenuBarItem *)item
 {
-    [_alMenuBar ALMunuBarDismiss];
+    [_alMenuBar ALMenuBarDismiss];
 }
 
 - (void)tencentWeoboShare:(ALMenuBarItem *)item
 {
-    [_alMenuBar ALMunuBarDismiss];
+    [_alMenuBar ALMenuBarDismiss];
 }
 
 - (void)weixinShare:(ALMenuBarItem *)item
 {
-    [_alMenuBar ALMunuBarDismiss];
+    [_alMenuBar ALMenuBarDismiss];
 }
 
 //- (void)ALMenuBar:(ALMenuBar *)menuBar didSelectIndex:(NSInteger)index
 //{
-//    [_alMenuBar ALMunuBarDismiss];
+//    [_alMenuBar ALMenuBarDismiss];
 //}
 //
 //- (void)ALMenuBarDidDismiss:(ALMenuBar *)menuBar

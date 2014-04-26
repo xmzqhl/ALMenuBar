@@ -307,7 +307,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
 }
 
-- (void)ALMunuBarShow
+- (void)ALMenuBarShow
 {
     UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
     if (![keywindow.subviews containsObject:self]) {
@@ -321,8 +321,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         }
         [keywindow addSubview:_coverView];
         
-        UIControl * dismissButton = [[UIControl alloc] initWithFrame:leftFrame];
-        [dismissButton addTarget:self action:@selector(ALMunuBarDismiss) forControlEvents:UIControlEventTouchUpInside];
+        UIControl *dismissButton = [[UIControl alloc] initWithFrame:leftFrame];
+        [dismissButton addTarget:self action:@selector(ALMenuBarDismiss) forControlEvents:UIControlEventTouchUpInside];
         dismissButton.backgroundColor = [UIColor clearColor];
         [_coverView addSubview:dismissButton];
 #if !__has_feature(objc_arc)
@@ -339,7 +339,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
 }
 
-- (void)ALMunuBarDismiss
+- (void)ALMenuBarDismiss
 {
     UIWindow * keywindow = [[UIApplication sharedApplication] keyWindow];
     CGRect dismissFrame = CGRectMake(0, keywindow.frame.size.height, self.frame.size.width, self.frame.size.height);

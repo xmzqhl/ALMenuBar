@@ -44,12 +44,12 @@
 /**
  显示视图
  */
-- (void)ALMunuBarShow;
+- (void)ALMenuBarShow;
 
 /**
  移除视图
  */
-- (void)ALMunuBarDismiss;
+- (void)ALMenuBarDismiss;
 
 @end
 
