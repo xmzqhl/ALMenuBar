@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FEC77C12-408A-416C-BBDB-987C687AEEA7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ALMenuBar</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E87D9943-5BB0-41A4-81A8-6655AA92E94B</key>
+		<string>https://github.com/wybflb/ALMenuBar.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>example/ALMenuBar.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E87D9943-5BB0-41A4-81A8-6655AA92E94B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/wybflb/ALMenuBar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E87D9943-5BB0-41A4-81A8-6655AA92E94B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E87D9943-5BB0-41A4-81A8-6655AA92E94B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ALMenuBar</string>
+		</dict>
+	</array>
+</dict>
+</plist>
