@@ -19,10 +19,10 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 @interface ALMenuBar () <UIScrollViewDelegate>
 @property (nonatomic, retain) NSMutableArray *menuBarItems;
-@property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UIPageControl *pageControl;
-@property (nonatomic, retain) UIView *coverView;
+@property (nonatomic, retain) UIScrollView   *contentView;
+@property (nonatomic, retain) UILabel        *titleLabel;
+@property (nonatomic, retain) UIPageControl  *pageControl;
+@property (nonatomic, retain) UIView         *coverView;
 @end
 
 @implementation ALMenuBar
@@ -34,7 +34,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
 #if !__has_feature(objc_arc)
     [_menuBarItems release]; _menuBarItems = nil;
-    [_scrollView release]; _scrollView = nil;
+    [_contentView release]; _contentView = nil;
     [_titleLabel release]; _titleLabel = nil;
     [_pageControl release]; _pageControl = nil;
     [_coverView release];  _coverView = nil;
@@ -133,21 +133,21 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)initCommonUI
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
+    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
     
-    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self setScrollViewEnable];
-    _scrollView.pagingEnabled = YES;
-    _scrollView.delegate = self;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    [self addSubview:_scrollView];
+    _contentView.pagingEnabled = YES;
+    _contentView.delegate = self;
+    _contentView.showsHorizontalScrollIndicator = NO;
+    [self addSubview:_contentView];
     
     [self initPageControl];
 }
 
 - (void)setScrollViewEnable
 {
-    _scrollView.scrollEnabled = ([self totalPages] > 1);
+    _contentView.scrollEnabled = ([self totalPages] > 1);
 }
 
 - (void)initPageControl
@@ -165,9 +165,9 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 - (void)changePage:(UIPageControl *)pageControl
 {
     NSInteger page = pageControl.currentPage;
-    __block typeof(_scrollView) blockScrollView = _scrollView;
+    __block typeof(_contentView) blockScrollView = _contentView;
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-        blockScrollView.contentOffset = CGPointMake(page * _scrollView.frame.size.width, 0);
+        blockScrollView.contentOffset = CGPointMake(page * blockScrollView.frame.size.width, 0);
     }];
 }
 
@@ -206,20 +206,20 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:0];
     menuBarItem.index = 0;
     [self addTapGestureToMenuBar:menuBarItem];
-    menuBarItem.frame = CGRectMake((_scrollView.frame.size.width - kDefaultItemSize) / 2.0, 0, kDefaultItemSize, kDefaultItemSize);
-    [_scrollView addSubview:menuBarItem];
+    menuBarItem.frame = CGRectMake((_contentView.frame.size.width - kDefaultItemSize) / 2.0, 0, kDefaultItemSize, kDefaultItemSize);
+    [_contentView addSubview:menuBarItem];
 }
 
 - (void)setDoubleItemFrame
 {
-    CGFloat totalMargin = _scrollView.frame.size.width - 2 * kDefaultItemSize;
+    CGFloat totalMargin = _contentView.frame.size.width - 2 * kDefaultItemSize;
     CGFloat margin = totalMargin / 3.0;
     for (int num = 0; num < _menuBarItems.count; num++) {
         ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:num];
         menuBarItem.index = num;
         [self addTapGestureToMenuBar:menuBarItem];
         menuBarItem.frame = CGRectMake(margin + num * (kDefaultItemSize + margin) , 0, kDefaultItemSize, kDefaultItemSize);
-        [_scrollView addSubview:menuBarItem];
+        [_contentView addSubview:menuBarItem];
     }
 }
 
@@ -233,13 +233,13 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
             ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:index];
             menuBarItem.index= index;
             [self addTapGestureToMenuBar:menuBarItem];
-            int relativeIndex = index - (page * 6);
+            int relativeIndex = index - (page * 6);  /**< 在本页面的相对位置*/
             int row = (relativeIndex / 3 < 1) ? 0 : 1; /**< 行数*/
             int coloumn = (relativeIndex % 3); /**< 列数*/
             
             int totalInterval = self.frame.size.width - 3 * kDefaultItemSize;
-            menuBarItem.frame = CGRectMake(coloumn * (kDefaultItemSize + totalInterval / 2) + page * _scrollView.frame.size.width, row * kDefaultItemSize, kDefaultItemSize, kDefaultItemSize);
-            [_scrollView addSubview:menuBarItem];
+            menuBarItem.frame = CGRectMake(coloumn * (kDefaultItemSize + totalInterval / 2) + page * _contentView.frame.size.width, row * kDefaultItemSize, kDefaultItemSize, kDefaultItemSize);
+            [_contentView addSubview:menuBarItem];
         }
     }
 }
@@ -260,19 +260,19 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     }
     
     if ([self totalPages] > 1) {
-        _scrollView.frame = CGRectMake(0,
+        _contentView.frame = CGRectMake(0,
                                        kTitleLabelHeight,
                                        CGRectGetWidth(self.bounds),
                                        CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight);
     } else {
-        _scrollView.frame = CGRectMake(0,
+        _contentView.frame = CGRectMake(0,
                                           kTitleLabelHeight,
                                           CGRectGetWidth(self.bounds),
                                           CGRectGetHeight(self.bounds) - kTitleLabelHeight);
     }
     
-    _scrollView.contentSize = CGSizeMake([self totalPages] * CGRectGetWidth(_scrollView.bounds),
-                                            CGRectGetHeight(_scrollView.bounds));
+    _contentView.contentSize = CGSizeMake([self totalPages] * CGRectGetWidth(_contentView.bounds),
+                                            CGRectGetHeight(_contentView.bounds));
 }
 
 - (void)layoutSubviews
@@ -289,7 +289,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 {
     if (_pageControl) {
         CGPoint offset = scrollView.contentOffset;
-        _pageControl.currentPage = offset.x / _scrollView.bounds.size.width;
+        _pageControl.currentPage = offset.x / _contentView.bounds.size.width;
     }
 }
 
@@ -369,7 +369,7 @@ static CGFloat kBottomMargin = 10.0f;
 @interface ALMenuBarItem ()
 
 @property (nonatomic, retain) UIImageView *imageView;
-@property (nonatomic, retain)UILabel *titleLabel;
+@property (nonatomic, retain) UILabel *titleLabel;
 
 @end
 
