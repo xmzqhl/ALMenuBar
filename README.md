@@ -7,7 +7,24 @@ enjoy it.
 
 Usage:
 _____________
-see the example in RootViewController
-
+simple like this:
+```C:n
+	UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
+    ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
+    
+    image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
+    ALMenuBarItem *item2 = [[ALMenuBarItem alloc] initWithTitle:@"腾讯微博" image:image target:self action:@selector(tencentWeoboShare:)];
+    
+    image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
+    ALMenuBarItem *item3 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
+    
+    NSMutableArray *items = [NSMutableArray array];
+    [items addObject:item1];
+    [items addObject:item2];
+    [items addObject:item3];
+    _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
+    [_alMenuBar ALMenuBarShow];
+```
+if you add nine ALMenuBarItem to the _alMenubar,the interface will like this:
  ![image](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect.PNG)
 
