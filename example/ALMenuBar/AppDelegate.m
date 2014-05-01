@@ -21,11 +21,9 @@
     RootViewController *root = [[RootViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
     self.window.rootViewController = nav;
-#if !__has_feature(objc_arc)
-    [root release];
-    [nav release];
-    [self.window autorelease];
-#endif
+    ALRelease(root);
+    ALRelease(nav);
+    ALAutoRelease(self.window);
     return YES;
 }
 

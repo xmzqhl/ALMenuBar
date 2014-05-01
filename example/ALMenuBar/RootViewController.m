@@ -45,9 +45,7 @@
 {
     MenuBarViewController *_menuBarVC = [[MenuBarViewController alloc] init];
     [self.navigationController pushViewController:_menuBarVC animated:YES];
-#if !__has_feature(objc_arc)
-    [_menuBarVC release];
-#endif
+    ALRelease(_menuBarVC);
 }
 
 @end

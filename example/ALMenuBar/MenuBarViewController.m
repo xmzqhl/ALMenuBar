@@ -18,8 +18,8 @@
 - (void)dealloc
 {
     _alMenuBar.delegate = nil;
-#if !__has_feature(objc_arc)
-    [_alMenuBar release]; _alMenuBar = nil;
+    ALReleaseToNil(_alMenuBar);
+#ifndef ALARC
     [super dealloc];
 #endif
 }
@@ -61,6 +61,7 @@
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item3 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
     
+    image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
     ALMenuBarItem *item4 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
@@ -68,6 +69,8 @@
     
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item6 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
+    
+    image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
     ALMenuBarItem *item7 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
@@ -94,17 +97,16 @@
         _alMenuBar.delegate = self;
     }
     [_alMenuBar ALMenuBarShow];
-#if !__has_feature(objc_arc)
-    [item1 release];
-    [item2 release];
-    [item3 release];
-    [item4 release];
-    [item5 release];
-    [item6 release];
-    [item7 release];
-    [item8 release];
-    [item9 release];
-#endif
+    
+    ALRelease(item1);
+    ALRelease(item2);
+    ALRelease(item3);
+    ALRelease(item4);
+    ALRelease(item5);
+    ALRelease(item6);
+    ALRelease(item7);
+    ALRelease(item8);
+    ALRelease(item9);
 }
 
 - (void)weiboShare:(ALMenuBarItem *)item

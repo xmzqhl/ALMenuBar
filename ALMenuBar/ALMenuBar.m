@@ -17,6 +17,44 @@ static CGFloat kDefaultItemSize = 90.0f;
 static CGFloat kDefaultTitleFontSize = 16.0f;
 #define kDefaultAnimationDuration 0.3f
 
+#if !__has_feature(objc_arc)
+    #ifndef ALRelease
+        #define ALRelease(_v) ([_v release]);
+    #endif
+
+    #ifndef ALAutoRelease
+        #define ALAutoRelease(_v) ([_v autorelease]);
+    #endif
+
+    #ifndef ALRetain
+        #define ALRetain(_v) ([_v retain]);
+    #endif
+
+    #ifndef ALReleaseToNil
+        #define ALReleaseToNil(_v) {([_v release]); (_v = nil);}
+    #endif
+#else
+    #ifndef ALRelease
+        #define ALRelease(_v)
+    #endif
+
+    #ifndef ALAutoRelease
+        #define ALAutoRelease(_v)
+    #endif
+
+    #ifndef ALRetain
+        #define ALRetain(_v)
+    #endif
+
+    #ifndef ALReleaseToNil
+        #define ALReleaseToNil(_v) (_v = nil);
+    #endif
+
+    #ifndef ALARC
+        #define ALARC YES
+    #endif
+#endif
+
 @interface ALMenuBar () <UIScrollViewDelegate>
 @property (nonatomic, retain) NSMutableArray *menuBarItems;
 @property (nonatomic, retain) UIScrollView   *contentView;
@@ -32,12 +70,12 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     for (ALMenuBarItem* item in _menuBarItems) {
         [item removeFromSuperview];
     }
-#if !__has_feature(objc_arc)
-    [_menuBarItems release]; _menuBarItems = nil;
-    [_contentView release]; _contentView = nil;
-    [_titleLabel release]; _titleLabel = nil;
-    [_pageControl release]; _pageControl = nil;
-    [_coverView release];  _coverView = nil;
+    ALReleaseToNil(_menuBarItems);
+    ALReleaseToNil(_contentView);
+    ALReleaseToNil(_titleLabel);
+    ALReleaseToNil(_pageControl);
+    ALReleaseToNil(_coverView);
+#ifndef ALARC
     [super dealloc];
 #endif
 }
@@ -118,13 +156,10 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 - (void)setItems:(NSMutableArray *)items
 {
     if (![_menuBarItems isEqualToArray:items]) {
-#if !__has_feature(objc_arc)
-        [_menuBarItems release];
-#endif
+        ALRelease(_menuBarItems);
         _menuBarItems = items;
-#if !__has_feature(objc_arc)
-        [_menuBarItems retain];
-#endif
+        ALRetain(_menuBarItems);
+        
         [self setScrollViewEnable];
         [self initPageControl];
         [self resetSubviewLayout];
@@ -196,9 +231,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ALMenuBarDidTaped:)];
     [item addGestureRecognizer:tap];
-#if !__has_feature(objc_arc)
-    [tap release];
-#endif
+    ALRelease(tap);
 }
 
 - (void)setSingalItemFrame
@@ -325,9 +358,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         [dismissButton addTarget:self action:@selector(ALMenuBarDismiss) forControlEvents:UIControlEventTouchUpInside];
         dismissButton.backgroundColor = [UIColor clearColor];
         [_coverView addSubview:dismissButton];
-#if !__has_feature(objc_arc)
-        [dismissButton release];
-#endif
+        ALRelease(dismissButton);
+        
         // Present view animated
         self.frame = CGRectMake(0, keywindow.frame.size.height, keywindow.frame.size.width, self.frame.size.height);
         [keywindow addSubview:self];
@@ -377,9 +409,9 @@ static CGFloat kBottomMargin = 10.0f;
 
 - (void)dealloc
 {
-#if !__has_feature(objc_arc)
-    [_imageView release]; _imageView = nil;
-    [_titleLabel release]; _titleLabel = nil;
+    ALReleaseToNil(_imageView);
+    ALReleaseToNil(_titleLabel);
+#ifndef ALARC
     [super dealloc];
 #endif
 }
