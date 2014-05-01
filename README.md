@@ -28,5 +28,6 @@ simple like this:
     [_alMenuBar ALMenuBarShow];
 ```
 if you add nine ALMenuBarItem to the _alMenubar,the interface will like this:
- ![ALMenuBar](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect.PNG)
+ ![image](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect.PNG)
+ ![image](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect1.PNG)
 
