@@ -9,3 +9,5 @@ Usage:
 _____________
 see the example in RootViewController
 
+ ![image](https://github.com/wybflb/ALMenuBar/raw/master/screenshots/effect.PNG)
+
