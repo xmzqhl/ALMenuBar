@@ -117,7 +117,7 @@
 - (void)tencentWeoboShare:(ALMenuBarItem *)item
 {
     [_alMenuBar ALMenuBarDismiss];
-}
+} 
 
 - (void)weixinShare:(ALMenuBarItem *)item
 {
