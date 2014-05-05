@@ -27,7 +27,7 @@ simple like this:
     _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
     [_alMenuBar ALMenuBarShow];
 ```
-This is the screenshot:\n
+This is the screenshot:
 ![ALMenuBar](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/screenshot.png)
 
 
