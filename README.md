@@ -27,7 +27,11 @@ simple like this:
     _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
     [_alMenuBar ALMenuBarShow];
 ```
-if you add nine ALMenuBarItem to the _alMenubar,the interface will like this:
+This is the screenshot:
+![ALMenuBar](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/screenshot.png)
+
+
+and if you add 9 ALMenuBarItem to the _alMenubar,the interface will like this:
 
 ![ALMenuBar](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect.PNG)
 ![ALMenuBar](https://github.com/wybflb/ALMenuBar/raw/master/example/screenshots/effect1.PNG)
