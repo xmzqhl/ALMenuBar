@@ -247,12 +247,12 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 - (void)setDoubleItemFrame
 {
     CGFloat totalMargin = _contentView.frame.size.width - 2 * kDefaultItemSize;
-    CGFloat margin = totalMargin / 3.0;
+    CGFloat margin = totalMargin / 4.0;
     for (int num = 0; num < _menuBarItems.count; num++) {
         ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:num];
         menuBarItem.index = num;
         [self addTapGestureToMenuBar:menuBarItem];
-        menuBarItem.frame = CGRectMake(margin + num * (kDefaultItemSize + margin) , 0, kDefaultItemSize, kDefaultItemSize);
+        menuBarItem.frame = CGRectMake(margin + num * (kDefaultItemSize + margin * 2) , 0, kDefaultItemSize, kDefaultItemSize);
         [_contentView addSubview:menuBarItem];
     }
 }
