@@ -30,8 +30,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         #define ALRetain(_v) ([_v retain]);
     #endif
 
-    #ifndef ALReleaseToNil
-        #define ALReleaseToNil(_v) {([_v release]); (_v = nil);}
+    #ifndef ALReleaseSave
+        #define ALReleaseSave(_v) {([_v release]); (_v = nil);}
     #endif
 #else
     #ifndef ALRelease
@@ -46,8 +46,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         #define ALRetain(_v)
     #endif
 
-    #ifndef ALReleaseToNil
-        #define ALReleaseToNil(_v) (_v = nil);
+    #ifndef ALReleaseSave
+        #define ALReleaseSave(_v) (_v = nil);
     #endif
 
     #ifndef ALARC
@@ -70,11 +70,11 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     for (ALMenuBarItem* item in _menuBarItems) {
         [item removeFromSuperview];
     }
-    ALReleaseToNil(_menuBarItems);
-    ALReleaseToNil(_contentView);
-    ALReleaseToNil(_titleLabel);
-    ALReleaseToNil(_pageControl);
-    ALReleaseToNil(_coverView);
+    ALReleaseSave(_menuBarItems);
+    ALReleaseSave(_contentView);
+    ALReleaseSave(_titleLabel);
+    ALReleaseSave(_pageControl);
+    ALReleaseSave(_coverView);
 #ifndef ALARC
     [super dealloc];
 #endif
@@ -133,14 +133,15 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)initTitleLabelWithTitle:(NSString *)title
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTitleLabelHeight)];
+    CGFloat _borderWidth = 1.0f;
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(-_borderWidth, 0, self.frame.size.width + 2 * _borderWidth, kTitleLabelHeight)];
     _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.text = title;
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont systemFontOfSize:kDefaultTitleFontSize];
     _titleLabel.layer.borderColor = [UIColor grayColor].CGColor;
-    _titleLabel.layer.borderWidth = 1.0f;
+    _titleLabel.layer.borderWidth = _borderWidth;
     [self addSubview:_titleLabel];
 }
 
@@ -409,8 +410,8 @@ static CGFloat kBottomMargin = 10.0f;
 
 - (void)dealloc
 {
-    ALReleaseToNil(_imageView);
-    ALReleaseToNil(_titleLabel);
+    ALReleaseSave(_imageView);
+    ALReleaseSave(_titleLabel);
 #ifndef ALARC
     [super dealloc];
 #endif

@@ -35,7 +35,7 @@
 - (void)setTitle:(NSString *)title;
 
 /**
- 设置item
+ 设置item数据
  @param items 一个可变的数组，里面存放ALMenuBarItem对象
  @attention 如果未使用initWithTitle:items:方法初始化视图，或者需要修改items的时候使用
  */

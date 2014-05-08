@@ -27,8 +27,8 @@
             #define ALRetain(_v) ([_v retain]);
         #endif
 
-        #ifndef ALReleaseToNil
-            #define ALReleaseToNil(_v) {([_v release]); (_v = nil);}
+        #ifndef ALReleaseSave
+            #define ALReleaseSave(_v) {([_v release]); (_v = nil);}
         #endif
     #else
         #ifndef ALRelease
@@ -43,8 +43,8 @@
             #define ALRetain(_v)
         #endif
 
-        #ifndef ALReleaseToNil
-            #define ALReleaseToNil(_v) (_v = nil);
+        #ifndef ALReleaseSave
+            #define ALReleaseSave(_v) (_v = nil);
         #endif
 
         #ifndef ALARC

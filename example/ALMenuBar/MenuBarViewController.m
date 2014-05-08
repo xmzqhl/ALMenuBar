@@ -18,7 +18,7 @@
 - (void)dealloc
 {
     _alMenuBar.delegate = nil;
-    ALReleaseToNil(_alMenuBar);
+    ALReleaseSave(_alMenuBar);
 #ifndef ALARC
     [super dealloc];
 #endif
