@@ -3,7 +3,7 @@ ALMenuBar
 When your project has the action which sharing something to other social app,you can user this to show the choice,hope you
 enjoy it.
 
-###support ARC and MRC
+###support `ARC and MRC`
 You can use either style in your Cocoa project. ALMenuBar Will figure out which you are using at compile time and do the right thing.
 
 
