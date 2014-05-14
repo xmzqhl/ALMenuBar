@@ -122,13 +122,19 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)setSelfProperty
 {
-    self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
+//    self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.8];
     self.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.layer.shadowOffset = CGSizeMake(0, -2);
     self.layer.shadowRadius = 5.0;
     self.layer.shadowOpacity = 0.8;
     CGRect frame = [UIScreen mainScreen].bounds;
     self.frame = CGRectMake(0, 0, frame.size.width, kDefaultHeight);
+    
+    UIImageView *backGroundView = [[UIImageView alloc] init];
+    backGroundView.frame = self.bounds;
+    backGroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    backGroundView.image = [UIImage imageNamed:@"ALMenuBackgroud.png"];
+    [self addSubview:backGroundView];
 }
 
 - (void)initTitleLabelWithTitle:(NSString *)title

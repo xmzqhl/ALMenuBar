@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58B5111D192378F400EBC54E /* ALMenuBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B5111C192378F400EBC54E /* ALMenuBackgroud.png */; };
 		58B57F2C18ECFD630008ED17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B57F2B18ECFD630008ED17 /* Foundation.framework */; };
 		58B57F2E18ECFD630008ED17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B57F2D18ECFD630008ED17 /* CoreGraphics.framework */; };
 		58B57F3018ECFD630008ED17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B57F2F18ECFD630008ED17 /* UIKit.framework */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58B5111C192378F400EBC54E /* ALMenuBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ALMenuBackgroud.png; sourceTree = "<group>"; };
 		58B57F2818ECFD630008ED17 /* ALMenuBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALMenuBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58B57F2B18ECFD630008ED17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		58B57F2D18ECFD630008ED17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -174,6 +176,7 @@
 		58B57F6018ECFFFE0008ED17 /* ALMenuBar */ = {
 			isa = PBXGroup;
 			children = (
+				58B5111C192378F400EBC54E /* ALMenuBackgroud.png */,
 				58B57F6118ECFFFE0008ED17 /* ALMenuBar.h */,
 				58B57F6218ECFFFE0008ED17 /* ALMenuBar.m */,
 			);
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58B57F3618ECFD630008ED17 /* InfoPlist.strings in Resources */,
+				58B5111D192378F400EBC54E /* ALMenuBackgroud.png in Resources */,
 				58B57F3E18ECFD630008ED17 /* Images.xcassets in Resources */,
 				58B57F6E18ED040B0008ED17 /* iPhone_sinaweibo.png in Resources */,
 				58B57F6F18ED040B0008ED17 /* iPhone_sinaweibo@2x.png in Resources */,
