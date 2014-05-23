@@ -10,7 +10,7 @@ You can use either style in your Cocoa project. ALMenuBar Will figure out which 
 ###Usage:
 ---------
 simple like this:
-```C:n
+``` objective-c
 	UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
     ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     
