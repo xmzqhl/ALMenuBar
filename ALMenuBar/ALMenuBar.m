@@ -167,7 +167,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         _menuBarItems = items;
         ALRetain(_menuBarItems);
         
-        [self setScrollViewEnable];
+        [self setScrollEnabledForContentViewIfNeed];
         [self initPageControl];
         [self resetSubviewLayout];
     }
@@ -178,7 +178,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
     
     _contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self setScrollViewEnable];
+    [self setScrollEnabledForContentViewIfNeed];
     _contentView.pagingEnabled = YES;
     _contentView.delegate = self;
     _contentView.showsHorizontalScrollIndicator = NO;
@@ -187,7 +187,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     [self initPageControl];
 }
 
-- (void)setScrollViewEnable
+- (void)setScrollEnabledForContentViewIfNeed
 {
     _contentView.scrollEnabled = ([self totalPages] > 1);
 }
