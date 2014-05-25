@@ -124,6 +124,11 @@
     [_alMenuBar ALMenuBarDismiss];
 }
 
+//- (void)ALMenuBarDidShown:(ALMenuBar *)menuBar
+//{
+//    
+//}
+
 //- (void)ALMenuBar:(ALMenuBar *)menuBar didSelectIndex:(NSInteger)index
 //{
 //    [_alMenuBar ALMenuBarDismiss];

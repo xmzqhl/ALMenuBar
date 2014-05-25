@@ -341,8 +341,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
             [item.target performSelector:item.action withObject:item afterDelay:0];
         }
         
-        if ([_delegate respondsToSelector:@selector(ALMenuBar:didSelectIndex:)]) {
-            [_delegate ALMenuBar:self didSelectIndex:item.index];
+        if ([_delegate respondsToSelector:@selector(ALMenuBar:didSelectItemAtIndex:)]) {
+            [_delegate ALMenuBar:self didSelectItemAtIndex:item.index];
         }
     }
 }
@@ -374,6 +374,10 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
         __block typeof(self) blockSelf = self;
         [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
             blockSelf.frame = showFrame;
+        } completion:^(BOOL finished) {
+            if (_delegate && [_delegate respondsToSelector:@selector(ALMenuBarDidShown:)]) {
+                [_delegate ALMenuBarDidShown:self];
+            }
         }];
     }
 }
