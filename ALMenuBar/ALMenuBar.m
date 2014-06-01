@@ -450,7 +450,7 @@ static CGFloat kBottomMargin = 10.0f;
         _imageView.backgroundColor = [UIColor clearColor];
         [self addSubview:_imageView];
         
-        _titleLabel = [[UILabel alloc] init] ;
+        _titleLabel = [[UILabel alloc] init];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.numberOfLines = 1;
