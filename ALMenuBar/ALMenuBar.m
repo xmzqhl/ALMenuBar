@@ -15,23 +15,23 @@ static NSInteger kDefaultItemsNumberInOnePage = 6;
 static CGFloat kDefaultPageControlHeight = 20.0;
 static CGFloat kDefaultItemSize = 90.0f;
 static CGFloat kDefaultTitleFontSize = 16.0f;
-#define kDefaultAnimationDuration 0.3f
+static CGFloat kDefaultAnimationDuration = 0.3f;
 
 #if !__has_feature(objc_arc)
     #ifndef ALRelease
-        #define ALRelease(_v) ([_v release]);
+        #define ALRelease(_v) ([(_v) release]);
     #endif
 
     #ifndef ALAutoRelease
-        #define ALAutoRelease(_v) ([_v autorelease]);
+        #define ALAutoRelease(_v) ([(_v) autorelease]);
     #endif
 
     #ifndef ALRetain
-        #define ALRetain(_v) ([_v retain]);
+        #define ALRetain(_v) ([(_v) retain]);
     #endif
 
     #ifndef ALReleaseSave
-        #define ALReleaseSave(_v) {([_v release]); (_v = nil);}
+        #define ALReleaseSave(_v) if (_v) {[(_v) release]; (_v) = nil;}
     #endif
 #else
     #ifndef ALRelease
@@ -47,7 +47,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     #endif
 
     #ifndef ALReleaseSave
-        #define ALReleaseSave(_v) (_v = nil);
+        #define ALReleaseSave(_v) if (_v) {(_v) = nil;}
     #endif
 
     #ifndef ALARC
@@ -135,6 +135,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
     backGroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     backGroundView.image = [UIImage imageNamed:@"ALMenuBackgroud.png"];
     [self addSubview:backGroundView];
+    ALRelease(backGroundView);
 }
 
 - (void)initTitleLabelWithTitle:(NSString *)title
@@ -265,8 +266,8 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)setItemsFrame
 {
-    for(int page = 0; page < [self totalPages]; page++) {
-        for(int index = (page * 6); index < (page * 6 + 6); index++) {
+    for (int page = 0; page < [self totalPages]; page++) {
+        for (int index = (page * 6); index < (page * 6 + 6); index++) {
             if (index == _menuBarItems.count) {
                 break;
             }
@@ -384,7 +385,7 @@ static CGFloat kDefaultTitleFontSize = 16.0f;
 
 - (void)ALMenuBarDismiss
 {
-    UIWindow * keywindow = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
     CGRect dismissFrame = CGRectMake(0, keywindow.frame.size.height, self.frame.size.width, self.frame.size.height);
     if (!CGRectEqualToRect(self.frame, dismissFrame)) {
         __block typeof(self) blockSelf = self;

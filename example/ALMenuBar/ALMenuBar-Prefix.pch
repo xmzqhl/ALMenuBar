@@ -16,24 +16,24 @@
 
     #if !__has_feature(objc_arc)
         #ifndef ALRelease
-            #define ALRelease(_v) ([_v release]);
+            #define ALRelease(_v) ([(_v) release]);
         #endif
 
         #ifndef ALAutoRelease
-            #define ALAutoRelease(_v) ([_v autorelease]);
+            #define ALAutoRelease(_v) ([(_v) autorelease]);
         #endif
 
         #ifndef ALRetain
-            #define ALRetain(_v) ([_v retain]);
+            #define ALRetain(_v) ([(_v) retain]);
         #endif
 
         #ifndef ALReleaseSave
-            #define ALReleaseSave(_v) {([_v release]); (_v = nil);}
+            #define ALReleaseSave(_v) if (_v) {[(_v) release]; (_v) = nil;}
         #endif
     #else
         #ifndef ALRelease
             #define ALRelease(_v)
-        #endif
+            #endif
 
         #ifndef ALAutoRelease
             #define ALAutoRelease(_v)
@@ -44,12 +44,13 @@
         #endif
 
         #ifndef ALReleaseSave
-            #define ALReleaseSave(_v) (_v = nil);
+            #define ALReleaseSave(_v) if (_v) {(_v) = nil;}
         #endif
 
         #ifndef ALARC
             #define ALARC YES
         #endif
     #endif
+
 
 #endif
