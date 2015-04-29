@@ -18,10 +18,6 @@
 - (void)dealloc
 {
     _alMenuBar.delegate = nil;
-    ALReleaseSave(_alMenuBar);
-#ifndef ALARC
-    [super dealloc];
-#endif
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -97,16 +93,6 @@
         _alMenuBar.delegate = self;
     }
     [_alMenuBar ALMenuBarShow];
-    
-    ALRelease(item1);
-    ALRelease(item2);
-    ALRelease(item3);
-    ALRelease(item4);
-    ALRelease(item5);
-    ALRelease(item6);
-    ALRelease(item7);
-    ALRelease(item8);
-    ALRelease(item9);
 }
 
 - (void)weiboShare:(ALMenuBarItem *)item

@@ -14,43 +14,4 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
-    #if !__has_feature(objc_arc)
-        #ifndef ALRelease
-            #define ALRelease(_v) ([(_v) release]);
-        #endif
-
-        #ifndef ALAutoRelease
-            #define ALAutoRelease(_v) ([(_v) autorelease]);
-        #endif
-
-        #ifndef ALRetain
-            #define ALRetain(_v) ([(_v) retain]);
-        #endif
-
-        #ifndef ALReleaseSave
-            #define ALReleaseSave(_v) if (_v) {[(_v) release]; (_v) = nil;}
-        #endif
-    #else
-        #ifndef ALRelease
-            #define ALRelease(_v)
-            #endif
-
-        #ifndef ALAutoRelease
-            #define ALAutoRelease(_v)
-        #endif
-
-        #ifndef ALRetain
-            #define ALRetain(_v)
-        #endif
-
-        #ifndef ALReleaseSave
-            #define ALReleaseSave(_v) if (_v) {(_v) = nil;}
-        #endif
-
-        #ifndef ALARC
-            #define ALARC YES
-        #endif
-    #endif
-
-
 #endif

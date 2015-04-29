@@ -20,7 +20,11 @@
 
 @interface ALMenuBar : UIView
 
+#if !__has_feature(objc_arc)
 @property (nonatomic, assign) id<ALMenuBarDelegate>delegate;
+#else
+@property (nonatomic, weak) id<ALMenuBarDelegate>delegate;
+#endif
 
 /**
  @brief 初始化视图
