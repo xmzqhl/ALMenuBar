@@ -22,9 +22,7 @@
     RootViewController *root = [[RootViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
     self.window.rootViewController = nav;
-    ALRelease(root);
-    ALRelease(nav);
-    ALAutoRelease(window);
+
     return YES;
 }
 
