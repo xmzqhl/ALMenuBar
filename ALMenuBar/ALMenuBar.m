@@ -107,7 +107,7 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title items:(NSMutableArray *)items
+- (id)initWithTitle:(NSString *)title items:(NSArray *)items
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {

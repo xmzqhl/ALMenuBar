@@ -31,7 +31,7 @@
  @param title 视图标题
  @param items 一个可变数组，里面存放的是ALMenuBarItem对象。
  */
-- (instancetype)initWithTitle:(NSString *)title items:(NSMutableArray *)items;
+- (instancetype)initWithTitle:(NSString *)title items:(NSArray *)items;
 
 /**
  设置视图标题

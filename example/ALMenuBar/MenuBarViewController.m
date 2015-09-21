@@ -74,17 +74,8 @@
     
     image = [UIImage imageNamed:@"iPhone_weixinShare.png"];
     ALMenuBarItem *item9 = [[ALMenuBarItem alloc] initWithTitle:@"微信" image:image target:self action:@selector(weixinShare:)];
-    NSMutableArray *items = [NSMutableArray array];
-    [items addObject:item1];
-    [items addObject:item2];
-    [items addObject:item3];
-    [items addObject:item4];
-    [items addObject:item5];
-    [items addObject:item6];
-    [items addObject:item7];
-    [items addObject:item8];
-    [items addObject:item9];
     
+    NSArray *items = @[item1, item2, item3, item4, item5, item6, item7, item8, item9];
     if (!_alMenuBar) {
         _alMenuBar = [[ALMenuBar alloc] initWithTitle:@"分享到" items:items];
 //        _alMenuBar = [[ALMenuBar alloc] initWithFrame:CGRectZero];
