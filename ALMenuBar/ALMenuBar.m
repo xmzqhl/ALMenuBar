@@ -208,9 +208,8 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 - (void)changePage:(UIPageControl *)pageControl
 {
     NSInteger page = pageControl.currentPage;
-    __block typeof(_contentView) blockScrollView = _contentView;
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-        blockScrollView.contentOffset = CGPointMake(page * blockScrollView.frame.size.width, 0);
+        self.contentView.contentOffset = CGPointMake(page * CGRectGetWidth(self.contentView.frame), 0);
     }];
 }
 
@@ -256,7 +255,7 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
     CGFloat totalMargin = _contentView.frame.size.width - 2 * kDefaultItemSize;
     CGFloat margin = totalMargin / 4.0;
     for (int num = 0; num < _menuBarItems.count; num++) {
-        ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:num];
+        ALMenuBarItem *menuBarItem = _menuBarItems[num];
         menuBarItem.index = num;
         [self addTapGestureToMenuBar:menuBarItem];
         menuBarItem.frame = CGRectMake(margin + num * (kDefaultItemSize + margin * 2) , 0, kDefaultItemSize, kDefaultItemSize);
