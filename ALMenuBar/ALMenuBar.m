@@ -140,7 +140,7 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 
 - (void)initTitleLabelWithTitle:(NSString *)title
 {
-    CGFloat _borderWidth = 1.0f;
+    CGFloat _borderWidth = (([UIScreen mainScreen].scale >= 2.0) ? 0.5f : 1.0f);
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(-_borderWidth, 0, self.frame.size.width + 2 * _borderWidth, kTitleLabelHeight)];
     _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
     _titleLabel.backgroundColor = [UIColor clearColor];
@@ -176,7 +176,7 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 
 - (void)initCommonUI
 {
-    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, self.frame.size.width, CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
+    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTitleLabelHeight, CGRectGetWidth(self.frame), CGRectGetHeight(self.bounds) - kDefaultPageControlHeight - kTitleLabelHeight)];
     
     _contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self setScrollEnabledForContentViewIfNeed];
@@ -197,7 +197,7 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 {
     if ([self totalPages] > 1) {
         _pageControl = [[UIPageControl alloc] init];
-        _pageControl.frame = CGRectMake(0, self.frame.size.height - kDefaultPageControlHeight, self.frame.size.width, kDefaultPageControlHeight);
+        _pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame) - kDefaultPageControlHeight, CGRectGetWidth(self.frame), kDefaultPageControlHeight);
         _pageControl.currentPage = 0;
         _pageControl.numberOfPages = [self totalPages];
         [_pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
@@ -267,19 +267,19 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 - (void)setItemsFrame
 {
     for (int page = 0; page < [self totalPages]; page++) {
-        for (int index = (page * 6); index < (page * 6 + 6); index++) {
+        for (NSInteger index = (page * kDefaultItemsNumberInOnePage); index < (page * kDefaultItemsNumberInOnePage + kDefaultItemsNumberInOnePage); index++) {
             if (index == _menuBarItems.count) {
                 break;
             }
-            ALMenuBarItem *menuBarItem = [_menuBarItems objectAtIndex:index];
+            ALMenuBarItem *menuBarItem = _menuBarItems[index];
             menuBarItem.index= index;
             [self addTapGestureToMenuBar:menuBarItem];
-            int relativeIndex = index - (page * 6);  /**< 在本页面的相对位置*/
+            NSInteger relativeIndex = index - (page * kDefaultItemsNumberInOnePage);  /**< 在本页面的相对位置*/
             int row = (relativeIndex / 3 < 1) ? 0 : 1; /**< 行数*/
             int coloumn = (relativeIndex % 3); /**< 列数*/
             
-            int totalInterval = self.frame.size.width - 3 * kDefaultItemSize;
-            menuBarItem.frame = CGRectMake(coloumn * (kDefaultItemSize + totalInterval / 2) + page * _contentView.frame.size.width, row * kDefaultItemSize, kDefaultItemSize, kDefaultItemSize);
+            int totalInterval = CGRectGetWidth(self.frame) - 3 * kDefaultItemSize;
+            menuBarItem.frame = CGRectMake(coloumn * (kDefaultItemSize + totalInterval / 2) + page * CGRectGetWidth(_contentView.frame), row * kDefaultItemSize, kDefaultItemSize, kDefaultItemSize);
             [_contentView addSubview:menuBarItem];
         }
     }
@@ -353,8 +353,8 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
     UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
     if (![keywindow.subviews containsObject:self]) {
         // Calulate all frames
-        CGRect showFrame = CGRectMake(0, keywindow.frame.size.height - self.frame.size.height, keywindow.frame.size.width, self.frame.size.height);
-        CGRect leftFrame = CGRectMake(0, 0, keywindow.frame.size.width, keywindow.frame.size.height - self.frame.size.height);
+        CGRect showFrame = CGRectMake(0, CGRectGetHeight(keywindow.frame) - CGRectGetHeight(self.frame), CGRectGetWidth(keywindow.frame), CGRectGetHeight(self.frame));
+        CGRect leftFrame = CGRectMake(0, 0, CGRectGetWidth(keywindow.frame), CGRectGetHeight(keywindow.frame) - CGRectGetHeight(self.frame));
         
         if (!_coverView) {
             _coverView = [[UIView alloc] initWithFrame:keywindow.bounds];
@@ -369,12 +369,11 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
         ALRelease(dismissButton);
         
         // Present view animated
-        self.frame = CGRectMake(0, keywindow.frame.size.height, keywindow.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(0, CGRectGetHeight(keywindow.frame), CGRectGetWidth(keywindow.frame), CGRectGetHeight(self.frame));
         [keywindow addSubview:self];
         
-        __block typeof(self) blockSelf = self;
         [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-            blockSelf.frame = showFrame;
+            self.frame = showFrame;
         } completion:^(BOOL finished) {
             if (_delegate && [_delegate respondsToSelector:@selector(ALMenuBarDidShown:)]) {
                 [_delegate ALMenuBarDidShown:self];
@@ -386,20 +385,18 @@ static CGFloat kDefaultAnimationDuration = 0.3f;
 - (void)ALMenuBarDismiss
 {
     UIWindow *keywindow = [[UIApplication sharedApplication] keyWindow];
-    CGRect dismissFrame = CGRectMake(0, keywindow.frame.size.height, self.frame.size.width, self.frame.size.height);
+    CGRect dismissFrame = CGRectMake(0, CGRectGetHeight(keywindow.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     if (!CGRectEqualToRect(self.frame, dismissFrame)) {
-        __block typeof(self) blockSelf = self;
-        __block typeof(_coverView) blockCoverView = _coverView;
         if ([_delegate respondsToSelector:@selector(ALMenuBarWillDismiss:)]) {
             [_delegate ALMenuBarWillDismiss:self];
         }
         [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-            blockSelf.frame = dismissFrame;
+            self.frame = dismissFrame;
         } completion:^(BOOL finished) {
-            [blockCoverView removeFromSuperview];
-            [blockSelf removeFromSuperview];
+            [self.coverView removeFromSuperview];
+            [self removeFromSuperview];
             if ([_delegate respondsToSelector:@selector(ALMenuBarDidDismiss:)]) {
-                [_delegate ALMenuBarDidDismiss:blockSelf];
+                [_delegate ALMenuBarDidDismiss:self];
             }
         }];
     }
@@ -464,8 +461,8 @@ static CGFloat kBottomMargin = 10.0f;
 - (void)layoutSubviews
 {
     CGSize size = _imageView.image.size;
-    _imageView.frame = CGRectMake((CGRectGetWidth(self.bounds) - size.width) / 2.0, (self.frame.size.height - size.height - kItemTitleLabelHeight) / 2.0, size.width, size.height);
-    _titleLabel.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - kItemTitleLabelHeight - kBottomMargin, self.frame.size.width, kItemTitleLabelHeight);
+    _imageView.frame = CGRectMake((CGRectGetWidth(self.bounds) - size.width) / 2.0, (CGRectGetHeight(self.frame) - size.height - kItemTitleLabelHeight) / 2.0, size.width, size.height);
+    _titleLabel.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - kItemTitleLabelHeight - kBottomMargin, CGRectGetWidth(self.frame), kItemTitleLabelHeight);
 }
 
 @end
