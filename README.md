@@ -7,7 +7,7 @@ enjoy it.
 You can use either style in your Cocoa project. ALMenuBar Will figure out which you are using at compile time and do the right thing.
 
 
-###Usage:
+### Usage:
 ---------
 simple like this:
 ``` objective-c
