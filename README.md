@@ -3,7 +3,7 @@ ALMenuBar
 When your project has the action which sharing something to other social app,you can user this to show the choice,hope you
 enjoy it.
 
-###support `ARC and MRC`
+### support `ARC and MRC`
 You can use either style in your Cocoa project. ALMenuBar Will figure out which you are using at compile time and do the right thing.
 
 
@@ -11,7 +11,7 @@ You can use either style in your Cocoa project. ALMenuBar Will figure out which 
 ---------
 simple like this:
 ``` objective-c
-	UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
+    UIImage *image = [UIImage imageNamed:@"iPhone_sinaweibo.png"];
     ALMenuBarItem *item1 = [[ALMenuBarItem alloc] initWithTitle:@"新浪微博" image:image target:self action:@selector(weiboShare:)];
     
     image = [UIImage imageNamed:@"iPhone_tencentweibo.png"];
